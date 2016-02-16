@@ -64,7 +64,7 @@ static char isConcurrentXQChar;
 
 - (void)cancelXQ {
     [self cancel];
-    
+    NSLog(@"cancelXQ %@", self.name);
     for (NSValue *value in self.dependenciesXQ) {
         NSOperation *op = [value nonretainedObjectValue];
         [op cancelXQ];
@@ -176,7 +176,7 @@ static char isConcurrentXQChar;
         NSArray *operations = [self.serialOperationsDictXQ objectForKey:serialName];
         
         for (NSOperation *op in operations) {
-            if ([op isExecuting]) {
+            if ([op isExecuting] ) {
                 [op cancelXQ];
                 break;
             }
@@ -192,6 +192,21 @@ static char isConcurrentXQChar;
 
 - (NSNumber *)serialOperationsDictXQ {
     return objc_getAssociatedObject(self, &serialOperationsXQChar);
+}
+
+- (BOOL)isSerialProcessing:(NSString *)serialName {
+    if (serialName) {
+        NSArray *operations = [self.serialOperationsDictXQ objectForKey:serialName];
+        
+        for (NSOperation *op in operations) {
+            BOOL isNotFinishOrCancel = ![op isCancelled] && ![op isFinished];
+            if (isNotFinishOrCancel) {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
 }
 
 @end

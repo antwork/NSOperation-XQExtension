@@ -49,4 +49,6 @@
 
 - (void)cancelSerialOperationsByName:(NSString *)serialName;
 
+- (BOOL)isSerialProcessing:(NSString *)serialName;
+
 @end
