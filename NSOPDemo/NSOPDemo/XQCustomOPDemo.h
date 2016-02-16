@@ -6,8 +6,8 @@
 //  Copyright © 2016年 XQ. All rights reserved.
 //
 
-#import "XQCustomOperation.h"
+#import "XQBlockOperation.h"
 
-@interface XQCustomOPDemo : XQCustomOperation
+@interface XQCustomOPDemo : XQBlockOperation
 
 @end

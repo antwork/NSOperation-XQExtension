@@ -66,21 +66,21 @@
 //    [op4 cancelXQ];
     
     
-//    XQCustomOPDemo *customOP = [[XQCustomOPDemo alloc] initWithConcurrent:false actionBlock:^(XQCustomOperation *operation) {
-//        NSLog(@"begin Custom");
-//        NSInteger flag = 0;
-//        while (flag < 3) {
-//            [NSThread sleepForTimeInterval:1];
-//            if (operation.isCancelled) {
-//                NSLog(@"cancelled");
-//                return;
-//            }
-//            flag++;
-//            NSLog(@"next Flag %i", flag);
-//        }
-//    }];
-//    customOP.name = @"Custom OP";
-//    [self.queue addOperation:customOP];
+    XQCustomOPDemo *customOP = [[XQCustomOPDemo alloc] initWithConcurrent:false actionBlock:^(XQBlockOperation *operation) {
+        NSLog(@"begin Custom");
+        NSInteger flag = 0;
+        while (flag < 3) {
+            [NSThread sleepForTimeInterval:1];
+            if (operation.isCancelled) {
+                NSLog(@"cancelled");
+                return;
+            }
+            flag++;
+            NSLog(@"next Flag %i", flag);
+        }
+    }];
+    customOP.name = @"Custom OP";
+    [self.queue addOperation:customOP];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.queue cancelSerialOperationsByName:@"TEST"];

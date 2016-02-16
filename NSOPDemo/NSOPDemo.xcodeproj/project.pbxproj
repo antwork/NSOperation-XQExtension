@@ -15,8 +15,9 @@
 		A9961DA91C5BC87D009E692E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9961DA71C5BC87D009E692E /* LaunchScreen.storyboard */; };
 		A9961DB31C5BCB86009E692E /* NSOperation+XQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DB21C5BCB86009E692E /* NSOperation+XQExtension.m */; };
 		A9961DB61C5BD332009E692E /* XQBlockOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DB51C5BD332009E692E /* XQBlockOP.m */; };
-		A9961DB91C5C5CB0009E692E /* XQCustomOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DB81C5C5CB0009E692E /* XQCustomOperation.m */; };
 		A9961DBC1C5C623F009E692E /* XQCustomOPDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DBB1C5C623F009E692E /* XQCustomOPDemo.m */; };
+		A9FA524B1C7380C9009DC818 /* XQBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FA52481C7380C9009DC818 /* XQBlockOperation.m */; };
+		A9FA524C1C7380C9009DC818 /* XQHookOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FA524A1C7380C9009DC818 /* XQHookOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +35,12 @@
 		A9961DB21C5BCB86009E692E /* NSOperation+XQExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperation+XQExtension.m"; sourceTree = "<group>"; };
 		A9961DB41C5BD332009E692E /* XQBlockOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQBlockOP.h; sourceTree = "<group>"; };
 		A9961DB51C5BD332009E692E /* XQBlockOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQBlockOP.m; sourceTree = "<group>"; };
-		A9961DB71C5C5CB0009E692E /* XQCustomOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQCustomOperation.h; sourceTree = "<group>"; };
-		A9961DB81C5C5CB0009E692E /* XQCustomOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQCustomOperation.m; sourceTree = "<group>"; };
 		A9961DBA1C5C623F009E692E /* XQCustomOPDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQCustomOPDemo.h; sourceTree = "<group>"; };
 		A9961DBB1C5C623F009E692E /* XQCustomOPDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQCustomOPDemo.m; sourceTree = "<group>"; };
+		A9FA52471C7380C9009DC818 /* XQBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQBlockOperation.h; sourceTree = "<group>"; };
+		A9FA52481C7380C9009DC818 /* XQBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQBlockOperation.m; sourceTree = "<group>"; };
+		A9FA52491C7380C9009DC818 /* XQHookOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQHookOperation.h; sourceTree = "<group>"; };
+		A9FA524A1C7380C9009DC818 /* XQHookOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQHookOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +104,10 @@
 			children = (
 				A9961DB11C5BCB86009E692E /* NSOperation+XQExtension.h */,
 				A9961DB21C5BCB86009E692E /* NSOperation+XQExtension.m */,
-				A9961DB71C5C5CB0009E692E /* XQCustomOperation.h */,
-				A9961DB81C5C5CB0009E692E /* XQCustomOperation.m */,
+				A9FA52471C7380C9009DC818 /* XQBlockOperation.h */,
+				A9FA52481C7380C9009DC818 /* XQBlockOperation.m */,
+				A9FA52491C7380C9009DC818 /* XQHookOperation.h */,
+				A9FA524A1C7380C9009DC818 /* XQHookOperation.m */,
 			);
 			path = "NSOperation+XQExtension";
 			sourceTree = "<group>";
@@ -178,11 +183,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9961DA11C5BC87D009E692E /* ViewController.m in Sources */,
+				A9FA524C1C7380C9009DC818 /* XQHookOperation.m in Sources */,
 				A9961DB61C5BD332009E692E /* XQBlockOP.m in Sources */,
+				A9FA524B1C7380C9009DC818 /* XQBlockOperation.m in Sources */,
 				A9961D9E1C5BC87D009E692E /* AppDelegate.m in Sources */,
 				A9961DBC1C5C623F009E692E /* XQCustomOPDemo.m in Sources */,
 				A9961D9B1C5BC87D009E692E /* main.m in Sources */,
-				A9961DB91C5C5CB0009E692E /* XQCustomOperation.m in Sources */,
 				A9961DB31C5BCB86009E692E /* NSOperation+XQExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +336,7 @@
 				A9961DAF1C5BC87D009E692E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
