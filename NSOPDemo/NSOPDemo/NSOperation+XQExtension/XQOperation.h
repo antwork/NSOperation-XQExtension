@@ -34,26 +34,43 @@ typedef void(^XQOperationStateChangeBlock)(XQOperation *op, XQOperationState sta
 
 @property (copy, nonatomic) XQOperationStateChangeBlock statusBlockX;
 
+
 - (instancetype)initWithAsynchronous:(BOOL)asynchronous;
 
-// start method hook, will executing when start
+#pragma mark - Start
+
+// -------------------------------------------------------------------------------
+//  overide this method, should call [self finish] at the end
+// -------------------------------------------------------------------------------
 - (void)startHook;
 
-// cacel method hook , will executing when cancel
+#pragma mark - Cancel
+
+// -------------------------------------------------------------------------------
+//  if u overide this method,u should process error and call [self finish] at the end
+// -------------------------------------------------------------------------------
 - (void)cancelHook;
+
 
 #pragma mark - Pause
 
 - (void)pause;
 
-- (BOOL)isPaused;
-
 - (void)resume;
 
-// finish when task done
+- (void)pauseHook;
+
+#pragma mark - Finish
+
+// -------------------------------------------------------------------------------
+//	when you operation did really finish callFinishBlock should be true
+//  if cancel, callFinishBlock should be false
+// -------------------------------------------------------------------------------
 - (void)finish;
 
-// do sth in lock
+#pragma mark - Util
+
 - (id)processInLockBlock:(id(^)(void))block;
+
 
 @end

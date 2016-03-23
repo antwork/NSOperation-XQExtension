@@ -104,6 +104,8 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     return self;
 }
 
+#pragma mark - Start
+
 - (void)start {
     [self.lock lock];
     if ([self isCancelled]) {
@@ -118,17 +120,6 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     }
     [self.lock unlock];
 }
-
-- (void)operationDidCancel {
-    if (![self isFinished]) {
-        if (self.xqAsynchronous) {
-            [self performSelector:@selector(cancelHook) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
-        } else {
-            [self performSelectorOnMainThread:@selector(cancelHook) withObject:nil waitUntilDone:NO];
-        }
-    }
-}
-
 
 - (void)operationDidStart {
     [self.lock lock];
@@ -145,8 +136,39 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     
 }
 
+#pragma mark - Cancel
+
+- (void)cancel {
+    [self.lock lock];
+    if (![self isFinished] && ![self isCancelled]) {
+        [super cancel];
+        
+        if ([self isExecuting]) {
+            if (self.xqAsynchronous) {
+                [self performSelector:@selector(cancelHook) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+            } else {
+                [self performSelectorOnMainThread:@selector(cancelHook) withObject:nil waitUntilDone:NO];
+            }
+        }
+    }
+    if (self.statusBlockX) {
+        self.statusBlockX(self, XQOperationCancelledState);
+    }
+    [self.lock unlock];
+}
+
+- (void)operationDidCancel {
+    if (![self isFinished]) {
+        if (self.xqAsynchronous) {
+            [self performSelector:@selector(cancelHook) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+        } else {
+            [self performSelectorOnMainThread:@selector(cancelHook) withObject:nil waitUntilDone:NO];
+        }
+    }
+}
+
 // -------------------------------------------------------------------------------
-//  overide this method, should call [self finish] at the end
+//  if u overide this method,u should process error and call [self finish] at the end
 // -------------------------------------------------------------------------------
 - (void)cancelHook {
     NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:nil];
@@ -202,6 +224,8 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     
 }
 
+#pragma mark - Finish
+
 // -------------------------------------------------------------------------------
 //	when you operation did really finish callFinishBlock should be true
 //  if cancel, callFinishBlock should be false
@@ -216,28 +240,7 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     }
 }
 
-- (void)changeFinishState {
-    
-}
-
-- (void)cancel {
-    [self.lock lock];
-    if (![self isFinished] && ![self isCancelled]) {
-        [super cancel];
-        
-        if ([self isExecuting]) {
-            if (self.xqAsynchronous) {
-                [self performSelector:@selector(cancelHook) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
-            } else {
-                [self performSelectorOnMainThread:@selector(cancelHook) withObject:nil waitUntilDone:NO];
-            }
-        } 
-    }
-    if (self.statusBlockX) {
-        self.statusBlockX(self, XQOperationCancelledState);
-    }
-    [self.lock unlock];
-}
+#pragma mark - Util
 
 - (id)processInLockBlock:(id(^)(void))block {
     [self.lock lock];
