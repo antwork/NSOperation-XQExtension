@@ -227,8 +227,8 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
 #pragma mark - Finish
 
 // -------------------------------------------------------------------------------
-//	when you operation did really finish callFinishBlock should be true
-//  if cancel, callFinishBlock should be false
+//	call when you operation did finish
+//  if you subclass this method, remember call [super finish]
 // -------------------------------------------------------------------------------
 - (void)finish {
     [self.lock lock];
