@@ -7,20 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A97C2C341CA222D300FC27F1 /* XQStep1GetWeatherOp.m in Sources */ = {isa = PBXBuildFile; fileRef = A97C2C331CA222D300FC27F1 /* XQStep1GetWeatherOp.m */; };
+		A97C2C371CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m in Sources */ = {isa = PBXBuildFile; fileRef = A97C2C361CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m */; };
+		A97C2C3A1CA223F400FC27F1 /* XQShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A97C2C391CA223F400FC27F1 /* XQShareModel.m */; };
 		A9961D9B1C5BC87D009E692E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961D9A1C5BC87D009E692E /* main.m */; };
 		A9961D9E1C5BC87D009E692E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961D9D1C5BC87D009E692E /* AppDelegate.m */; };
 		A9961DA11C5BC87D009E692E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DA01C5BC87D009E692E /* ViewController.m */; };
 		A9961DA41C5BC87D009E692E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9961DA21C5BC87D009E692E /* Main.storyboard */; };
 		A9961DA61C5BC87D009E692E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9961DA51C5BC87D009E692E /* Assets.xcassets */; };
 		A9961DA91C5BC87D009E692E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9961DA71C5BC87D009E692E /* LaunchScreen.storyboard */; };
-		A9961DB31C5BCB86009E692E /* NSOperation+XQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DB21C5BCB86009E692E /* NSOperation+XQExtension.m */; };
-		A9961DB61C5BD332009E692E /* XQBlockOP.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DB51C5BD332009E692E /* XQBlockOP.m */; };
-		A9961DBC1C5C623F009E692E /* XQCustomOPDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = A9961DBB1C5C623F009E692E /* XQCustomOPDemo.m */; };
-		A9FA524B1C7380C9009DC818 /* XQBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FA52481C7380C9009DC818 /* XQBlockOperation.m */; };
-		A9FA524C1C7380C9009DC818 /* XQHookOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9FA524A1C7380C9009DC818 /* XQHookOperation.m */; };
+		A9D3A8161CA130E6004B110F /* XQOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D3A8151CA130E6004B110F /* XQOperation.m */; };
+		A9D3A8191CA13CC6004B110F /* NSOperation+XQExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D3A8181CA13CC6004B110F /* NSOperation+XQExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A97C2C321CA222D300FC27F1 /* XQStep1GetWeatherOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQStep1GetWeatherOp.h; sourceTree = "<group>"; };
+		A97C2C331CA222D300FC27F1 /* XQStep1GetWeatherOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQStep1GetWeatherOp.m; sourceTree = "<group>"; };
+		A97C2C351CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQStep2ProcessWeatherOp.h; sourceTree = "<group>"; };
+		A97C2C361CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQStep2ProcessWeatherOp.m; sourceTree = "<group>"; };
+		A97C2C381CA223F400FC27F1 /* XQShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQShareModel.h; sourceTree = "<group>"; };
+		A97C2C391CA223F400FC27F1 /* XQShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQShareModel.m; sourceTree = "<group>"; };
 		A9961D961C5BC87D009E692E /* NSOPDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSOPDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9961D9A1C5BC87D009E692E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A9961D9C1C5BC87D009E692E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -31,16 +37,10 @@
 		A9961DA51C5BC87D009E692E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9961DA81C5BC87D009E692E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9961DAA1C5BC87D009E692E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9961DB11C5BCB86009E692E /* NSOperation+XQExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperation+XQExtension.h"; sourceTree = "<group>"; };
-		A9961DB21C5BCB86009E692E /* NSOperation+XQExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperation+XQExtension.m"; sourceTree = "<group>"; };
-		A9961DB41C5BD332009E692E /* XQBlockOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQBlockOP.h; sourceTree = "<group>"; };
-		A9961DB51C5BD332009E692E /* XQBlockOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQBlockOP.m; sourceTree = "<group>"; };
-		A9961DBA1C5C623F009E692E /* XQCustomOPDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQCustomOPDemo.h; sourceTree = "<group>"; };
-		A9961DBB1C5C623F009E692E /* XQCustomOPDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQCustomOPDemo.m; sourceTree = "<group>"; };
-		A9FA52471C7380C9009DC818 /* XQBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQBlockOperation.h; sourceTree = "<group>"; };
-		A9FA52481C7380C9009DC818 /* XQBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQBlockOperation.m; sourceTree = "<group>"; };
-		A9FA52491C7380C9009DC818 /* XQHookOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQHookOperation.h; sourceTree = "<group>"; };
-		A9FA524A1C7380C9009DC818 /* XQHookOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQHookOperation.m; sourceTree = "<group>"; };
+		A9D3A8141CA130E6004B110F /* XQOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQOperation.h; sourceTree = "<group>"; };
+		A9D3A8151CA130E6004B110F /* XQOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQOperation.m; sourceTree = "<group>"; };
+		A9D3A8171CA13CC6004B110F /* NSOperation+XQExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperation+XQExtension.h"; sourceTree = "<group>"; };
+		A9D3A8181CA13CC6004B110F /* NSOperation+XQExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperation+XQExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,10 +75,12 @@
 			children = (
 				A9961D9C1C5BC87D009E692E /* AppDelegate.h */,
 				A9961D9D1C5BC87D009E692E /* AppDelegate.m */,
-				A9961DB41C5BD332009E692E /* XQBlockOP.h */,
-				A9961DB51C5BD332009E692E /* XQBlockOP.m */,
-				A9961DBA1C5C623F009E692E /* XQCustomOPDemo.h */,
-				A9961DBB1C5C623F009E692E /* XQCustomOPDemo.m */,
+				A97C2C381CA223F400FC27F1 /* XQShareModel.h */,
+				A97C2C391CA223F400FC27F1 /* XQShareModel.m */,
+				A97C2C321CA222D300FC27F1 /* XQStep1GetWeatherOp.h */,
+				A97C2C331CA222D300FC27F1 /* XQStep1GetWeatherOp.m */,
+				A97C2C351CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.h */,
+				A97C2C361CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m */,
 				A9961DB01C5BCB75009E692E /* NSOperation+XQExtension */,
 				A9961D9F1C5BC87D009E692E /* ViewController.h */,
 				A9961DA01C5BC87D009E692E /* ViewController.m */,
@@ -102,12 +104,10 @@
 		A9961DB01C5BCB75009E692E /* NSOperation+XQExtension */ = {
 			isa = PBXGroup;
 			children = (
-				A9961DB11C5BCB86009E692E /* NSOperation+XQExtension.h */,
-				A9961DB21C5BCB86009E692E /* NSOperation+XQExtension.m */,
-				A9FA52471C7380C9009DC818 /* XQBlockOperation.h */,
-				A9FA52481C7380C9009DC818 /* XQBlockOperation.m */,
-				A9FA52491C7380C9009DC818 /* XQHookOperation.h */,
-				A9FA524A1C7380C9009DC818 /* XQHookOperation.m */,
+				A9D3A8171CA13CC6004B110F /* NSOperation+XQExtension.h */,
+				A9D3A8181CA13CC6004B110F /* NSOperation+XQExtension.m */,
+				A9D3A8141CA130E6004B110F /* XQOperation.h */,
+				A9D3A8151CA130E6004B110F /* XQOperation.m */,
 			);
 			path = "NSOperation+XQExtension";
 			sourceTree = "<group>";
@@ -183,13 +183,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9961DA11C5BC87D009E692E /* ViewController.m in Sources */,
-				A9FA524C1C7380C9009DC818 /* XQHookOperation.m in Sources */,
-				A9961DB61C5BD332009E692E /* XQBlockOP.m in Sources */,
-				A9FA524B1C7380C9009DC818 /* XQBlockOperation.m in Sources */,
+				A9D3A8161CA130E6004B110F /* XQOperation.m in Sources */,
+				A97C2C371CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m in Sources */,
 				A9961D9E1C5BC87D009E692E /* AppDelegate.m in Sources */,
-				A9961DBC1C5C623F009E692E /* XQCustomOPDemo.m in Sources */,
+				A97C2C341CA222D300FC27F1 /* XQStep1GetWeatherOp.m in Sources */,
 				A9961D9B1C5BC87D009E692E /* main.m in Sources */,
-				A9961DB31C5BCB86009E692E /* NSOperation+XQExtension.m in Sources */,
+				A97C2C3A1CA223F400FC27F1 /* XQShareModel.m in Sources */,
+				A9D3A8191CA13CC6004B110F /* NSOperation+XQExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

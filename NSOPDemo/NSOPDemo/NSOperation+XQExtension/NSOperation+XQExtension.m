@@ -13,25 +13,10 @@ static char dependenciesXQChar;
 
 static char serialOperationsXQChar;
 
-static char isExecutingXQChar;
-
-static char isFinishedXQChar;
-
-static char isCancelledXQChar;
-
-static char isConcurrentXQChar;
-
 @implementation NSOperation (XQExtension)
 
 @dynamic dependenciesXQ;
 
-@dynamic isConcurrent_;
-
-@dynamic isExecuting_;
-
-@dynamic isCancelled_;
-
-@dynamic isFinished_;
 
 #pragma mark - Dependency extension
 
@@ -63,48 +48,15 @@ static char isConcurrentXQChar;
 }
 
 - (void)cancelXQ {
-    [self cancel];
     NSLog(@"cancelXQ %@", self.name);
     for (NSValue *value in self.dependenciesXQ) {
         NSOperation *op = [value nonretainedObjectValue];
         [op cancelXQ];
     }
-}
-
-#pragma mark - Custom NSOperation extension
-
-- (void)changingExecutingKVOBlockXQ:(void(^)(void))block {
-    [self willChangeValueForKey:@"isExecuting"];
-    if (block) {
-        block();
-    }
-    [self didChangeValueForKey:@"isExecuting"];
-}
-
-- (void)changingCompleteWithKVOBlockXQ:(void(^)(void))block {
-    [self willChangeValueForKey:@"isFinished"];
-    [self willChangeValueForKey:@"isExecuting"];
     
-    if (block) {
-        block();
-    }
-    
-    [self didChangeValueForKey:@"isFinished"];
-    [self didChangeValueForKey:@"isExecuting"];
+    [self cancel];
 }
 
-- (void)changingCancelWithKVOBlockXQ:(void(^)(void))block {
-    [self willChangeValueForKey:@"isCancelled"];
-    [self willChangeValueForKey:@"isFinished"];
-    [self willChangeValueForKey:@"isExecuting"];
-    if (block) {
-        block();
-    }
-    
-    [self didChangeValueForKey:@"isCancelled"];
-    [self didChangeValueForKey:@"isFinished"];
-    [self didChangeValueForKey:@"isExecuting"];
-}
 
 #pragma mark - Setter
 
@@ -112,21 +64,6 @@ static char isConcurrentXQChar;
     objc_setAssociatedObject(self, &dependenciesXQChar, dependenciesXQ, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (void)setIsExecuting_:(NSNumber *)isExecuting_ {
-    objc_setAssociatedObject(self, &isExecutingXQChar, isExecuting_, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (void)setIsFinished_:(NSNumber *)isFinished_ {
-    objc_setAssociatedObject(self, &isFinishedXQChar, isFinished_, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (void)setIsConcurrent_:(NSNumber *)isConcurrent_ {
-    objc_setAssociatedObject(self, &isConcurrentXQChar, isConcurrent_, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (void)setIsCancelled_:(NSNumber *)isCancelled_ {
-    objc_setAssociatedObject(self, &isCancelledXQChar, isCancelled_, OBJC_ASSOCIATION_RETAIN);
-}
 
 #pragma mark - Getter
 
@@ -134,25 +71,7 @@ static char isConcurrentXQChar;
     return objc_getAssociatedObject(self, &dependenciesXQChar);
 }
 
-- (NSNumber *)isExecuting_ {
-    return objc_getAssociatedObject(self, &isExecutingXQChar);
-}
-
-- (NSNumber *)isFinished_ {
-    return objc_getAssociatedObject(self, &isFinishedXQChar);
-}
-
-- (NSNumber *)isConcurrent_ {
-    return objc_getAssociatedObject(self, &isConcurrentXQChar);
-}
-
-- (NSNumber *)isCancelled_ {
-    return objc_getAssociatedObject(self, &isCancelledXQChar);
-}
-
 @end
-
-
 
 
 @implementation NSOperationQueue (XQExtension)
@@ -176,10 +95,7 @@ static char isConcurrentXQChar;
         NSArray *operations = [self.serialOperationsDictXQ objectForKey:serialName];
         
         for (NSOperation *op in operations) {
-            if ([op isExecuting] ) {
-                [op cancelXQ];
-                break;
-            }
+            [op cancel];
         }
         
         [self.serialOperationsDictXQ removeObjectForKey:serialName];
