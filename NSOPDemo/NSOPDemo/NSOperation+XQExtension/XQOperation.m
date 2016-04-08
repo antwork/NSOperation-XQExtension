@@ -108,6 +108,21 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
 
 - (void)start {
     [self.lock lock];
+    // check if dependencies fail, if fail go fail too
+    NSArray *dependencies = self.dependencies;
+    if (dependencies.count > 0) {
+        NSError *error = nil;
+        for (NSOperation *operation in dependencies) {
+            if ([operation isFailureXQ]) {
+                error = operation.errorX;
+                break;
+            }
+        }
+        if (error) {
+            self.errorX = [error copy];
+        }
+    }
+    
     if ([self isCancelled]) {
         [self operationDidCancel];
     } else if ([self isReady]) {
@@ -227,21 +242,29 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
 #pragma mark - Finish
 
 // -------------------------------------------------------------------------------
-//	call when you operation did finish
-//  if you subclass this method, remember call [super finish]
+// Do not override this method.
 // -------------------------------------------------------------------------------
 - (void)finish {
-    if (![NSThread isMainThread]) {
-        [self performSelectorOnMainThread:@selector(finish) withObject:nil waitUntilDone:NO];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.lock lock];
+        self.state = XQOperationFinishedState;
+        
+        if (self.finishBlockX) {
+            self.finishBlockX(self, self.shareDataX, self.errorX);
+        }
+        
+        // 在主线程完成
+        [self performSelectorOnMainThread:@selector(finishHook) withObject:nil waitUntilDone:NO];
+        
+        [self.lock unlock];
+    });
+}
+
+// -------------------------------------------------------------------------------
+//  do sth when operation finished
+// -------------------------------------------------------------------------------
+- (void)finishHook {
     
-    [self.lock lock];
-    self.state = XQOperationFinishedState;
-    [self.lock unlock];
-    
-    if (self.finishBlockX) {
-        self.finishBlockX(self, self.shareDataX, self.errorX);
-    }
 }
 
 #pragma mark - Util

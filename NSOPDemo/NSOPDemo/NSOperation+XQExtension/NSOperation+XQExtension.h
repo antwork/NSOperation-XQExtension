@@ -12,13 +12,25 @@
 
 @property (nonatomic, strong, readonly) NSMutableArray *dependenciesXQ;
 
+// -------------------------------------------------------------------------------
+//  mark operation failure error
+// -------------------------------------------------------------------------------
+@property (strong, nonatomic) NSError *errorX;
+
 #pragma mark - Dependency extension
 
 - (void)addDependencyXQ:(NSOperation *)operation;
 
 - (void)removeDependencyXQ:(NSOperation *)operation;
 
+#pragma mark - Utils
+
 - (void)cancelXQ;
+
+// -------------------------------------------------------------------------------
+//  errorX != nil -> fail
+// -------------------------------------------------------------------------------
+- (BOOL)isFailureXQ;
 
 @end
 

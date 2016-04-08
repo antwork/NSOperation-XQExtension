@@ -28,11 +28,10 @@ typedef void(^XQOperationStateChangeBlock)(XQOperation *op, XQOperationState sta
 
 @property (strong, nonatomic) id shareDataX;
 
-@property (strong, nonatomic) NSError *errorX;
-
 @property (copy, nonatomic) XQOperationFinishBlock finishBlockX;
 
 @property (copy, nonatomic) XQOperationStateChangeBlock statusBlockX;
+
 
 
 - (instancetype)initWithAsynchronous:(BOOL)asynchronous;
@@ -63,10 +62,14 @@ typedef void(^XQOperationStateChangeBlock)(XQOperation *op, XQOperationState sta
 #pragma mark - Finish
 
 // -------------------------------------------------------------------------------
-//	call when you operation did finish
-//  if you subclass this method, remember call [super finish]
+// Do not override this method.
 // -------------------------------------------------------------------------------
 - (void)finish;
+
+// -------------------------------------------------------------------------------
+//  do sth when operation finished
+// -------------------------------------------------------------------------------
+- (void)finishHook;
 
 #pragma mark - Util
 

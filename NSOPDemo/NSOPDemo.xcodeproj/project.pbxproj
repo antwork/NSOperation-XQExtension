@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A949BC6F1CB7AF5F00B4F5B0 /* FailOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A949BC6E1CB7AF5F00B4F5B0 /* FailOperation.m */; };
 		A97C2C341CA222D300FC27F1 /* XQStep1GetWeatherOp.m in Sources */ = {isa = PBXBuildFile; fileRef = A97C2C331CA222D300FC27F1 /* XQStep1GetWeatherOp.m */; };
 		A97C2C371CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m in Sources */ = {isa = PBXBuildFile; fileRef = A97C2C361CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m */; };
 		A97C2C3A1CA223F400FC27F1 /* XQShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A97C2C391CA223F400FC27F1 /* XQShareModel.m */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A949BC6D1CB7AF5F00B4F5B0 /* FailOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailOperation.h; sourceTree = "<group>"; };
+		A949BC6E1CB7AF5F00B4F5B0 /* FailOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailOperation.m; sourceTree = "<group>"; };
 		A97C2C321CA222D300FC27F1 /* XQStep1GetWeatherOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQStep1GetWeatherOp.h; sourceTree = "<group>"; };
 		A97C2C331CA222D300FC27F1 /* XQStep1GetWeatherOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XQStep1GetWeatherOp.m; sourceTree = "<group>"; };
 		A97C2C351CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XQStep2ProcessWeatherOp.h; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 				A97C2C331CA222D300FC27F1 /* XQStep1GetWeatherOp.m */,
 				A97C2C351CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.h */,
 				A97C2C361CA222EE00FC27F1 /* XQStep2ProcessWeatherOp.m */,
+				A949BC6D1CB7AF5F00B4F5B0 /* FailOperation.h */,
+				A949BC6E1CB7AF5F00B4F5B0 /* FailOperation.m */,
 				A9961DB01C5BCB75009E692E /* NSOperation+XQExtension */,
 				A9961D9F1C5BC87D009E692E /* ViewController.h */,
 				A9961DA01C5BC87D009E692E /* ViewController.m */,
@@ -189,6 +194,7 @@
 				A97C2C341CA222D300FC27F1 /* XQStep1GetWeatherOp.m in Sources */,
 				A9961D9B1C5BC87D009E692E /* main.m in Sources */,
 				A97C2C3A1CA223F400FC27F1 /* XQShareModel.m in Sources */,
+				A949BC6F1CB7AF5F00B4F5B0 /* FailOperation.m in Sources */,
 				A9D3A8191CA13CC6004B110F /* NSOperation+XQExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

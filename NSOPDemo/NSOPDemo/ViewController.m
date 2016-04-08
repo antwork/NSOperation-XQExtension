@@ -11,6 +11,7 @@
 #import "XQOperation.h"
 #import "XQStep1GetWeatherOp.h"
 #import "XQStep2ProcessWeatherOp.h"
+#import "FailOperation.h"
 
 @interface ViewController ()
 
@@ -54,11 +55,38 @@
 
 }
 
+- (void)testFailXQ {
+    FailOperation *fail1 = [[FailOperation alloc] initWithAsynchronous:YES];
+    fail1.name = @"fail1";
+    
+    FailOperation *fail2 = [[FailOperation alloc] initWithAsynchronous:YES];
+    fail2.name = @"fail2";
+    
+    FailOperation *fail3 = [[FailOperation alloc] initWithAsynchronous:YES];
+    fail3.name = @"fail3";
+    
+    [fail2 addDependencyXQ:fail1];
+    [fail3 addDependencyXQ:fail2];
+    
+    [self.queue addOperations:@[fail1, fail2, fail3] waitUntilFinished:NO];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"%@", self.queue.operations);
+    });
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     self.queue = [[NSOperationQueue alloc] init];
-    self.queue.maxConcurrentOperationCount = 1;
+//    self.queue.maxConcurrentOperationCount = 1;
+    
+    [self testFailXQ];
+    return;
+    
+    
     __weak typeof(self) weakSelf = self;
     NSOperation *savedOP = [NSBlockOperation blockOperationWithBlock:^{
         NSLog(@"begin");

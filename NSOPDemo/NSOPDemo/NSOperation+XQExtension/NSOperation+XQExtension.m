@@ -13,6 +13,8 @@ static char dependenciesXQChar;
 
 static char serialOperationsXQChar;
 
+static char errorXChar;
+
 @implementation NSOperation (XQExtension)
 
 @dynamic dependenciesXQ;
@@ -57,6 +59,13 @@ static char serialOperationsXQChar;
     [self cancel];
 }
 
+// -------------------------------------------------------------------------------
+//  errorX != nil -> fail
+// -------------------------------------------------------------------------------
+- (BOOL)isFailureXQ {
+    return self.errorX != nil;
+}
+
 
 #pragma mark - Setter
 
@@ -65,10 +74,19 @@ static char serialOperationsXQChar;
 }
 
 
+- (void)setErrorX:(NSError *)errorX {
+    objc_setAssociatedObject(self, &errorXChar, errorX, OBJC_ASSOCIATION_RETAIN);
+}
+
+
 #pragma mark - Getter
 
 - (NSMutableArray *)dependenciesXQ {
     return objc_getAssociatedObject(self, &dependenciesXQChar);
+}
+
+- (NSError *)errorX {
+    return objc_getAssociatedObject(self, &errorXChar);
 }
 
 @end
