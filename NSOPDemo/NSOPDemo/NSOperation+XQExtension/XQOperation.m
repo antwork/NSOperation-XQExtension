@@ -231,6 +231,10 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
 //  if you subclass this method, remember call [super finish]
 // -------------------------------------------------------------------------------
 - (void)finish {
+    if (![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:@selector(finish) withObject:nil waitUntilDone:NO];
+    }
+    
     [self.lock lock];
     self.state = XQOperationFinishedState;
     [self.lock unlock];

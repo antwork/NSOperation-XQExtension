@@ -47,7 +47,7 @@ typedef void(^XQOperationStateChangeBlock)(XQOperation *op, XQOperationState sta
 #pragma mark - Cancel
 
 // -------------------------------------------------------------------------------
-//  if u overide this method,u should process error and call [self finish] at the end
+//  if you overide this method,you should process error and call [self finish] at the end
 // -------------------------------------------------------------------------------
 - (void)cancelHook;
 
