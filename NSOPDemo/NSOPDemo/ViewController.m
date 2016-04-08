@@ -16,6 +16,9 @@
 
 @property (strong, nonatomic) NSOperationQueue *queue;
 
+
+@property (strong, nonatomic) NSOperation *savedOP;
+
 @end
 
 @implementation ViewController
@@ -56,6 +59,25 @@
     
     self.queue = [[NSOperationQueue alloc] init];
     self.queue.maxConcurrentOperationCount = 1;
+    __weak typeof(self) weakSelf = self;
+    NSOperation *savedOP = [NSBlockOperation blockOperationWithBlock:^{
+        NSLog(@"begin");
+        sleep(10);
+        if ([weakSelf.savedOP isCancelled]) {
+            return;
+        }
+        NSLog(@"end");
+    }];
+    [self.queue addOperation:savedOP];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [savedOP cancel];
+    });
+    self.savedOP = savedOP;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSLog(@"OP:%@ isC:%i isFi:%i", savedOP, [savedOP isCancelled], [savedOP isFinished]);
+    });
+    return;
     
     // 测试cancel会不会自动从Queue里移除, 答案是会
     NSOperation *op1 = [NSBlockOperation blockOperationWithBlock:^{
