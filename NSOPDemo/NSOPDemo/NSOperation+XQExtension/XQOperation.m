@@ -104,6 +104,32 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     return self;
 }
 
+#pragma mark - Hooks
+
+// -------------------------------------------------------------------------------
+//  overide this method, should call [self finish] at the end
+// -------------------------------------------------------------------------------
+- (void)startHook {
+    
+}
+
+// -------------------------------------------------------------------------------
+//  if u overide this method,u should process error and call [self finish] at the end
+// -------------------------------------------------------------------------------
+- (void)cancelHook {
+    NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:nil];
+    self.errorX = error;
+    
+    [self finish];
+}
+
+// -------------------------------------------------------------------------------
+//  do sth when operation finished
+// -------------------------------------------------------------------------------
+- (void)finishHook {
+    
+}
+
 #pragma mark - Start
 
 - (void)start {
@@ -120,6 +146,9 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
         }
         if (error) {
             self.errorX = [error copy];
+            [self performSelectorOnMainThread:@selector(finish) withObject:nil waitUntilDone:NO];
+            [self.lock unlock];
+            return;
         }
     }
     
@@ -142,13 +171,6 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
     [self startHook];
     
     [self.lock unlock];
-}
-
-// -------------------------------------------------------------------------------
-//  overide this method, should call [self finish] at the end
-// -------------------------------------------------------------------------------
-- (void)startHook {
-    
 }
 
 #pragma mark - Cancel
@@ -181,17 +203,6 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
         }
     }
 }
-
-// -------------------------------------------------------------------------------
-//  if u overide this method,u should process error and call [self finish] at the end
-// -------------------------------------------------------------------------------
-- (void)cancelHook {
-    NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCancelled userInfo:nil];
-    self.errorX = error;
-    
-    [self finish];
-}
-
 
 #pragma mark - Pause
 
@@ -245,26 +256,17 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
 // Do not override this method.
 // -------------------------------------------------------------------------------
 - (void)finish {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.lock lock];
-        self.state = XQOperationFinishedState;
-        
-        if (self.finishBlockX) {
-            self.finishBlockX(self, self.shareDataX, self.errorX);
-        }
-        
-        // 在主线程完成
-        [self performSelectorOnMainThread:@selector(finishHook) withObject:nil waitUntilDone:NO];
-        
-        [self.lock unlock];
-    });
-}
-
-// -------------------------------------------------------------------------------
-//  do sth when operation finished
-// -------------------------------------------------------------------------------
-- (void)finishHook {
+    [self.lock lock];
+    self.state = XQOperationFinishedState;
     
+    if (self.finishBlockX) {
+        self.finishBlockX(self, self.shareDataX, self.errorX);
+    }
+    
+    // 在主线程完成
+    [self performSelectorOnMainThread:@selector(finishHook) withObject:nil waitUntilDone:NO];
+    
+    [self.lock unlock];
 }
 
 #pragma mark - Util

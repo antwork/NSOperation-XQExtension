@@ -36,19 +36,23 @@ typedef void(^XQOperationStateChangeBlock)(XQOperation *op, XQOperationState sta
 
 - (instancetype)initWithAsynchronous:(BOOL)asynchronous;
 
-#pragma mark - Start
+#pragma mark - Hooks
 
 // -------------------------------------------------------------------------------
 //  overide this method, should call [self finish] at the end
 // -------------------------------------------------------------------------------
 - (void)startHook;
 
-#pragma mark - Cancel
 
 // -------------------------------------------------------------------------------
 //  if you overide this method,you should process error and call [self finish] at the end
 // -------------------------------------------------------------------------------
 - (void)cancelHook;
+
+// -------------------------------------------------------------------------------
+//  do sth when operation finished
+// -------------------------------------------------------------------------------
+- (void)finishHook;
 
 
 #pragma mark - Pause
@@ -65,11 +69,6 @@ typedef void(^XQOperationStateChangeBlock)(XQOperation *op, XQOperationState sta
 // Do not override this method.
 // -------------------------------------------------------------------------------
 - (void)finish;
-
-// -------------------------------------------------------------------------------
-//  do sth when operation finished
-// -------------------------------------------------------------------------------
-- (void)finishHook;
 
 #pragma mark - Util
 
