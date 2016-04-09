@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ENUM(NSInteger) {
+    XQErrorCodeShareDataNotSatisfied = 8709001,
+};
+
 @interface NSOperation (XQExtension)
 
 @property (nonatomic, strong, readonly) NSMutableArray *dependsOnSelfOpsXQ;
@@ -47,3 +51,5 @@
 - (BOOL)isSerialProcessing:(NSString *)serialName;
 
 @end
+
+extern NSString * const XQOperationErrorMessageKey;

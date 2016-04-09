@@ -161,3 +161,5 @@ static char errorXChar;
 }
 
 @end
+
+NSString * const XQOperationErrorMessageKey = @"XQOperationErrorMessageKey";

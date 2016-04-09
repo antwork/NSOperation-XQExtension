@@ -85,7 +85,7 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
 @implementation XQOperation
 
 - (instancetype)init {
-    return nil;
+    return [self initWithAsynchronous:YES];
 }
 
 - (instancetype)initWithAsynchronous:(BOOL)asynchronous {
