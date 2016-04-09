@@ -35,9 +35,8 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
             switch (toState) {
                 case XQOperationPausedState:
                 case XQOperationExecutingState:
-                    return YES;
                 case XQOperationFinishedState:
-                    return isCancelled;
+                    return YES;
                 default:
                     return NO;
             }
@@ -146,7 +145,7 @@ static inline BOOL XQStateTransitionIsValid(XQOperationState fromState, XQOperat
         }
         if (error) {
             self.errorX = [error copy];
-            [self performSelectorOnMainThread:@selector(finish) withObject:nil waitUntilDone:NO];
+            [self finish];
             [self.lock unlock];
             return;
         }

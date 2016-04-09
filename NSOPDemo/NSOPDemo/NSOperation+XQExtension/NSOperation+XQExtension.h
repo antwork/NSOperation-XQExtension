@@ -10,7 +10,7 @@
 
 @interface NSOperation (XQExtension)
 
-@property (nonatomic, strong, readonly) NSMutableArray *dependenciesXQ;
+@property (nonatomic, strong, readonly) NSMutableArray *dependsOnSelfOpsXQ;
 
 // -------------------------------------------------------------------------------
 //  mark operation failure error
@@ -31,6 +31,8 @@
 //  errorX != nil -> fail
 // -------------------------------------------------------------------------------
 - (BOOL)isFailureXQ;
+
+- (NSArray *)getDependsOnSelfOps;
 
 @end
 

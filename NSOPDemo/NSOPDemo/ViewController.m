@@ -83,7 +83,9 @@
     self.queue = [[NSOperationQueue alloc] init];
 //    self.queue.maxConcurrentOperationCount = 1;
     
-    [self testFailXQ];
+//    [self testFailXQ];
+    
+    [self doSth];
     return;
     
     

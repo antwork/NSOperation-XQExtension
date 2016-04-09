@@ -20,9 +20,7 @@
 }
 
 - (void)finishHook {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"finish:%@ error:%@", self.name, self.errorX);
-    });
+    NSLog(@"finish:%@ error:%@", self.name, self.errorX);
 }
 
 @end

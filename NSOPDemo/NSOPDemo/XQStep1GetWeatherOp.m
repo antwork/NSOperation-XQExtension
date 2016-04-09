@@ -23,6 +23,11 @@
 
 - (void)startHook {
     sleep(3);
+    
+    self.errorX = [NSError errorWithDomain:@"xxx" code:1 userInfo:nil];
+    [self finish];
+    return;
+    
     NSString *httpUrl = @"http://apis.baidu.com/apistore/weatherservice/citylist";
     NSString *httpArg = @"cityname=%E6%9C%9D%E9%98%B3";
     

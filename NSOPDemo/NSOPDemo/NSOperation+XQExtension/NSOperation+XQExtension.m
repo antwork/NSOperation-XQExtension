@@ -9,7 +9,7 @@
 #import "NSOperation+XQExtension.h"
 #import <objc/runtime.h>
 
-static char dependenciesXQChar;
+static char dependsOnSelfOpsXQChar;
 
 static char serialOperationsXQChar;
 
@@ -17,8 +17,7 @@ static char errorXChar;
 
 @implementation NSOperation (XQExtension)
 
-@dynamic dependenciesXQ;
-
+@dynamic dependsOnSelfOpsXQ;
 
 #pragma mark - Dependency extension
 
@@ -27,14 +26,14 @@ static char errorXChar;
         return;
     }
     
-    if (!operation.dependenciesXQ) {
-        operation.dependenciesXQ = [NSMutableArray array];
+    if (!operation.dependsOnSelfOpsXQ) {
+        operation.dependsOnSelfOpsXQ = [NSMutableArray array];
     }
     
     // can't add self to target array directly, it will cause dead circle
     // so use non retain obj to avoid it
     NSValue *value = [NSValue valueWithNonretainedObject:self];
-    [operation.dependenciesXQ addObject:value];
+    [operation.dependsOnSelfOpsXQ addObject:value];
     
     [self addDependency:operation];
 }
@@ -44,14 +43,16 @@ static char errorXChar;
         return;
     }
     
-    [operation.dependenciesXQ removeObject:self];
+    [operation.dependsOnSelfOpsXQ removeObject:self];
     
     [self removeDependency:operation];
 }
 
 - (void)cancelXQ {
+#ifdef DEBUG
     NSLog(@"cancelXQ %@", self.name);
-    for (NSValue *value in self.dependenciesXQ) {
+#endif
+    for (NSValue *value in self.dependsOnSelfOpsXQ) {
         NSOperation *op = [value nonretainedObjectValue];
         [op cancelXQ];
     }
@@ -66,12 +67,28 @@ static char errorXChar;
     return self.errorX != nil;
 }
 
+- (NSArray *)getDependsOnSelfOps {
+    NSMutableArray *values = [NSMutableArray array];
+    for (NSValue *value in self.dependsOnSelfOpsXQ) {
+        NSOperation *op = [value nonretainedObjectValue];
+        if (op) {
+            [values addObject:op];
+        }
+    }
+    if (values.count > 0) {
+        return values;
+    } else {
+        return nil;
+    }
+}
+
 
 #pragma mark - Setter
 
-- (void)setDependenciesXQ:(NSMutableArray *)dependenciesXQ {
-    objc_setAssociatedObject(self, &dependenciesXQChar, dependenciesXQ, OBJC_ASSOCIATION_RETAIN);
+- (void)setDependsOnSelfOpsXQ:(NSMutableArray *)dependsOnSelfOpsXQ {
+    objc_setAssociatedObject(self, &dependsOnSelfOpsXQChar, dependsOnSelfOpsXQ, OBJC_ASSOCIATION_RETAIN);
 }
+
 
 
 - (void)setErrorX:(NSError *)errorX {
@@ -81,8 +98,8 @@ static char errorXChar;
 
 #pragma mark - Getter
 
-- (NSMutableArray *)dependenciesXQ {
-    return objc_getAssociatedObject(self, &dependenciesXQChar);
+- (NSMutableArray *)dependsOnSelfOpsXQ {
+    return objc_getAssociatedObject(self, &dependsOnSelfOpsXQChar);
 }
 
 - (NSError *)errorX {
